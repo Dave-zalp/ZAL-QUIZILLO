@@ -5,6 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
 </head>
+
+<style>
+    body {
+    background: linear-gradient(135deg, #f5f7ff 0%, #c3e3ff 100%);
+    position: relative;
+    overflow-x: hidden;
+    }
+
+    body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+    radial-gradient(circle at 15% 50%, rgba(79, 70, 229, 0.08) 0%, transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(99, 102, 241, 0.08) 0%, transparent 25%);
+    pointer-events: none;
+    z-index: -1;
+    }
+
+    /* Optional: Add subtle animation to the background */
+    @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+    }
+
+    body {
+    animation: gradientShift 15s ease infinite;
+    background-size: 200% 200%;
+    }
+</style>
+
+
+
 <body class="bg-gray-50">
     <div class="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
         <!-- Header -->
@@ -53,6 +90,8 @@
                 </span>
             </div>
 
+            <form method="POST" action="{{ route('exam.active') }}">
+              @csrf
             <!-- Course List -->
             <div class="space-y-3">
                 <!-- Mathematics Courses -->
@@ -63,7 +102,7 @@
                      @forelse ($data as $course)
 
                      <label class="flex items-center p-3 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors space-x-4">
-                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500" name="{{ $course->id }}">
+                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500" name="{{ $course->id }}" onclick="updateSelectedCount()">
                         <span class="text-gray-700">{{ $course->name }}</span>
                         <span class="ml-auto text-sm text-gray-500">{{ $course->number_of_questions }} questions</span>
                     </label>
@@ -86,42 +125,13 @@
                 </button>
                 <p class="mt-2 text-sm text-gray-500">GOODLUCK !!!</p>
             </div>
+            </form>
         </div>
     </div>
 </body>
 </html>
 
 
-<style>
-    body {
-    background: linear-gradient(135deg, #f5f7ff 0%, #c3e3ff 100%);
-    position: relative;
-    overflow-x: hidden;
-    }
+<script src="{{ asset('dashboard/preview.js') }}"></script>
 
-    body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background:
-    radial-gradient(circle at 15% 50%, rgba(79, 70, 229, 0.08) 0%, transparent 25%),
-    radial-gradient(circle at 85% 30%, rgba(99, 102, 241, 0.08) 0%, transparent 25%);
-    pointer-events: none;
-    z-index: -1;
-    }
 
-    /* Optional: Add subtle animation to the background */
-    @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-    }
-
-    body {
-    animation: gradientShift 15s ease infinite;
-    background-size: 200% 200%;
-    }
-</style>
