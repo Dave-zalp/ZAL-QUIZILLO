@@ -12,7 +12,7 @@ class coursesController extends Controller
     //
     public function preview() : view
     {
-        $data  =  courses::select('name', 'number_of_questions')->inRandomOrder()->get();
+        $data  =  courses::select('id','name', 'number_of_questions')->inRandomOrder()->get();
         return view('dashboard.preview', compact('data'));
     }
 }

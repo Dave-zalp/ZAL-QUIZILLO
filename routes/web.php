@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\coursesController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\QuestionController;
 
 Route::get('/', function () {
     return view('index');
@@ -31,8 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::prefix('dashboard')->group(function ()
     {
         Route::get('/active', function () {
-            return view('dashboard.index');})->name('exam.active');
-            
+            return view('dashboard.index');})->name('exam.start');
+        Route::post('/exam', [QuestionController::class, 'index'])->name('exam.active');
         Route::get('/preview', [coursesController::class, 'preview'])->name('exam.preview');
 
     });

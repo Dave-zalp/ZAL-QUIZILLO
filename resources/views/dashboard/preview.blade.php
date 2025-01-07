@@ -102,7 +102,7 @@
                      @forelse ($data as $course)
 
                      <label class="flex items-center p-3 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors space-x-4">
-                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500" name="{{ $course->id }}" onclick="updateSelectedCount()">
+                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500" name="selected_courses[]" value="{{ $course->id }}" onclick="updateSelectedCount()">
                         <span class="text-gray-700">{{ $course->name }}</span>
                         <span class="ml-auto text-sm text-gray-500">{{ $course->number_of_questions }} questions</span>
                     </label>
